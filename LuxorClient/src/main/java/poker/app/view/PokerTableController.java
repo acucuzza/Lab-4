@@ -7,7 +7,8 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.UUID;
 
-
+import pokerBase.Player;
+import pokerBase.Table;
 
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
 
@@ -54,6 +55,8 @@ public class PokerTableController {
 	boolean bP2Sit = false;
 	boolean bP3Sit = false;
 	boolean bP4Sit = false;
+
+	Table gameTable = new Table();
 
 	// Reference to the main application.
 	private MainApp mainApp;
@@ -132,7 +135,6 @@ public class PokerTableController {
 	@FXML
 	public Button btnPlay;
 	
-	
 	private ToggleGroup tglGame;
 	
 	
@@ -163,5 +165,34 @@ public class PokerTableController {
 	}
 	
 	
-
+	@FXML
+	private void handleNORTHSitLeave() {
+		Player NORTH = new Player("NORTH");
+	    if (btnP1SitLeave.isDown()) {
+	        gameTable.AddPlayerToTable(NORTH);
+	    }
+	}
+	
+	@FXML
+	private void handleSOUTHSitLeave() {
+		Player SOUTH = new Player("SOUTH");
+	    gameTable.AddPlayerToTable(SOUTH);
+	}
+	
+	@FXML
+	private void handleEASTSitLeave() {
+		Player EAST = new Player("EAST");
+	    if (btnP1SitLeave.isDown()) {
+	        gameTable.AddPlayerToTable(EAST);
+	    }
+	}
+	
+	@FXML
+	private void handleWESTSitLeave() {
+		Player WEST = new Player("WEST");
+	    if (btnP1SitLeave.isDown()) {
+	        gameTable.AddPlayerToTable(WEST);
+	    }
+	}
+	
 }
