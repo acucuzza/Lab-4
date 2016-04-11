@@ -53,11 +53,11 @@ public class MainApp extends Application {
 		tbl = new Table();
 		
 		BorderPane root = new BorderPane();
-		Scene scene = new Scene(root, 1300, 500);
+		Scene scene = new Scene(root, 1250, 900);
 
 		this.primaryStage = primaryStage;
 		this.primaryStage.setTitle("Poker");
-
+		
 		// Set the application icon.
 		//this.primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/res/img/26.png")));
 
