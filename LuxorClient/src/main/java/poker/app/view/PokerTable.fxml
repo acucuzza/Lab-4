@@ -30,7 +30,7 @@
                         </HBox>
                         <Label fx:id="lblP3Name" alignment="CENTER" layoutX="169.0" layoutY="44.0" prefHeight="24.0" prefWidth="121.0" style="-fx-background-color: white;" text="Player 3" />
                         <TextField fx:id="txtP3Name" layoutX="179.0" layoutY="73.0" prefHeight="27.0" prefWidth="101.0" />
-                        <ToggleButton fx:id="btnP3SitLeave" layoutX="188.0" layoutY="108.0" mnemonicParsing="false" onAction="#handleP1SitLeave" text="SIT/LEAVE" />
+                        <ToggleButton fx:id="btnP3SitLeave" layoutX="188.0" layoutY="108.0" mnemonicParsing="false" onAction="#handleP3SitLeave" text="SIT/LEAVE" />
                         <Label fx:id="winner2" contentDisplay="CENTER" layoutX="80.0" layoutY="72.0" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: white;" text="WINNER" textAlignment="CENTER" />
                      </children>
                   </AnchorPane>
@@ -61,7 +61,7 @@
                      <children>
                         <Label fx:id="lblP4Name" alignment="CENTER" contentDisplay="CENTER" layoutX="840.0" layoutY="55.0" prefHeight="24.0" prefWidth="121.0" style="-fx-background-color: white;" text="Player 4" />
                         <TextField fx:id="txtP4Name" layoutX="850.0" layoutY="87.0" prefHeight="27.0" prefWidth="101.0" />
-                        <ToggleButton fx:id="btnP4SitLeave" layoutX="860.0" layoutY="121.0" mnemonicParsing="false" onAction="#handleP4itLeave" text="SIT/LEAVE" />
+                        <ToggleButton fx:id="btnP4SitLeave" layoutX="860.0" layoutY="121.0" mnemonicParsing="false" onAction="#handleP4SitLeave" text="SIT/LEAVE" />
                         <HBox fx:id="hBoxP4Cards" layoutX="377.0" layoutY="60.0" prefHeight="58.0" prefWidth="434.0">
                            <children>
                               <ImageView fitHeight="81.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" />
@@ -82,7 +82,7 @@
                      <children>
                         <Label fx:id="lblP2Name" alignment="CENTER" contentDisplay="CENTER" layoutX="245.0" layoutY="26.0" prefHeight="24.0" prefWidth="121.0" style="-fx-background-color: white;" text="Player 2" />
                         <TextField fx:id="txtP2Name" layoutX="254.0" layoutY="56.0" prefHeight="27.0" prefWidth="101.0" />
-                        <ToggleButton fx:id="btnP2SitLeave" layoutX="263.0" layoutY="91.0" mnemonicParsing="false" onAction="#handleP2TSitLeave" text="SIT/LEAVE" />
+                        <ToggleButton fx:id="btnP2SitLeave" layoutX="263.0" layoutY="91.0" mnemonicParsing="false" onAction="#handleP2SitLeave" text="SIT/LEAVE" />
                         <HBox fx:id="hBoxP2Cards" layoutX="9.0" layoutY="190.0" prefHeight="58.0" prefWidth="434.0">
                            <children>
                               <ImageView fitHeight="81.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true" />

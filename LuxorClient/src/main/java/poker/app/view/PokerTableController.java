@@ -1,7 +1,10 @@
 package poker.app.view;
 
+import static org.junit.Assert.fail;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
@@ -52,11 +55,16 @@ import pokerBase.Hand;
 import pokerBase.Player;
 import pokerBase.HandScore;
 import pokerBase.Table;
+import exceptions.DeckException;
+import exceptions.HandException;
+import pokerEnums.eCardNo;
+import pokerEnums.eHandStrength;
+import pokerEnums.eRank;
+import pokerEnums.eSuit;
 
 public class PokerTableController {
 
 	boolean bPlay = false;
-	
 	boolean bP1Sit = false;
 	boolean bP2Sit = false;
 	boolean bP3Sit = false;
@@ -83,6 +91,39 @@ public class PokerTableController {
 	private ImageView imgTransCardP3 = new ImageView();
 	private ImageView imgTransCardP4 = new ImageView();
 	private ImageView imgTransCardCommon = new ImageView();
+	
+	//Some Getters + Setters
+	public boolean getbP1Sit() {
+		return bP1Sit;
+	}
+
+	public void setbP1Sit(boolean bP1Sit) {
+		this.bP1Sit = bP1Sit;
+	}
+
+	public boolean getbP2Sit() {
+		return bP2Sit;
+	}
+
+	public void setbP2Sit(boolean bP2Sit) {
+		this.bP2Sit = bP2Sit;
+	}
+
+	public boolean getbP3Sit() {
+		return bP3Sit;
+	}
+
+	public void setbP3Sit(boolean bP3Sit) {
+		this.bP3Sit = bP3Sit;
+	}
+
+	public boolean getbP4Sit() {
+		return bP4Sit;
+	}
+
+	public void setbP4Sit(boolean bP4Sit) {
+		this.bP4Sit = bP4Sit;
+	}
 	
 	@FXML
 	public HBox HboxCommonArea;
@@ -143,7 +184,6 @@ public class PokerTableController {
 	
 	private ToggleGroup tglGame;
 	
-	
 	public PokerTableController(){ 
 	}
 
@@ -156,6 +196,7 @@ public class PokerTableController {
 	private void handlePlay(ActionEvent event) {
 		//Variables + Constructors
 		Deck D1 = new Deck();
+		
 		Hand hP1 = new Hand();
 		Hand hP2 = new Hand();
 		Hand hP3 = new Hand();
@@ -167,31 +208,31 @@ public class PokerTableController {
 		boolean bP2Win = false;
 		boolean bP3Win = false;
 		boolean bP4Win = false;
-			
+
 		// Deal Cards
-		for (int i = 0; i > 5; i++){
-			if (btnP1SitLeave.isSelected() == true){
+		for (int i = 0; i < 5; i++){
+			if (getbP1Sit() == true){
 				try {
 					hP1.Draw(D1);
 				} catch (DeckException e) {
 					e.printStackTrace();
 				}
 			}
-			if (btnP2SitLeave.isSelected() == true){
+			if (bP2Sit == true){
 				try {
 					hP2.Draw(D1);
 				} catch (DeckException e) {
 					e.printStackTrace();
 				}
 			}
-			if (btnP3SitLeave.isSelected() == true){
+			if (bP3Sit == true){
 				try {
 					hP3.Draw(D1);
 				} catch (DeckException e) {
 					e.printStackTrace();
 				}
 			}
-			if (btnP4SitLeave.isSelected() == true){
+			if (bP4Sit == true){
 				try {
 					hP4.Draw(D1);
 				} catch (DeckException e) {
@@ -199,9 +240,9 @@ public class PokerTableController {
 				}
 			}
 		}
-			
+
 		//Evaluate Hands
-		if (btnP1SitLeave.isSelected() == true){
+		if (bP1Sit == true){
 			try {
 				hP1 = pokerBase.Hand.Evaluate(hP1);
 				hands.add(hP1);
@@ -209,7 +250,7 @@ public class PokerTableController {
 				e.printStackTrace();
 			}
 		}
-		if (btnP2SitLeave.isSelected() == true){
+		if (bP2Sit == true){
 			try {
 				hP2 = pokerBase.Hand.Evaluate(hP2);
 				hands.add(hP2);
@@ -217,7 +258,7 @@ public class PokerTableController {
 				e.printStackTrace();
 			}
 		}
-		if (btnP3SitLeave.isSelected() == true){
+		if (bP3Sit == true){
 			try {
 				hP3 = pokerBase.Hand.Evaluate(hP3);
 				hands.add(hP3);
@@ -225,7 +266,7 @@ public class PokerTableController {
 				e.printStackTrace();
 			}
 		}
-		if (btnP4SitLeave.isSelected() == true){
+		if (bP4Sit == true){
 			try {
 				hP4 = pokerBase.Hand.Evaluate(hP4);
 				hands.add(hP4);
@@ -233,29 +274,28 @@ public class PokerTableController {
 				e.printStackTrace();
 			}
 		}
-			
-			//Sort Best Hand
-			Collections.sort(hands, Hand.HandRank);
-			
-			//Determine Winner
-			if (hands.get(0) == hP1){
-				bP1Win = true;
-				System.out.println("1");
-			}
-			if (hands.get(0) == hP2){
-				bP2Win = true;
-				System.out.println("2");
-			}
-			if (hands.get(0) == hP3){
-				bP3Win = true;
-				System.out.println("3");
-			}
-			if (hands.get(0) == hP4){
-				bP4Win = true;
-				System.out.println("4");
-			}
-			
+		
+		//Sort Best Hand
+		Collections.sort(hands, Hand.HandRank);
+
+		//Determine Winner
+		if (hands.get(0) == hP1){
+			bP1Win = true;
+			System.out.println("1");
 		}
+		if (hands.get(0) == hP2){
+			bP2Win = true;
+			System.out.println("2");
+		}
+		if (hands.get(0) == hP3){
+			bP3Win = true;
+			System.out.println("3");
+		}
+		if (hands.get(0) == hP4){
+			bP4Win = true;
+			System.out.println("4");
+		}
+	}
 
 	public void setMainApp(MainApp mainApp) {
 		this.mainApp = mainApp;
@@ -265,36 +305,52 @@ public class PokerTableController {
 	//Add Player 1
 	@FXML
 	private void handleP1SitLeave(ActionEvent event) {
-		Player P1 = new Player(txtP1Name.getText());
-	    if (btnP1SitLeave.isSelected()) {
-	        gameTable.AddPlayerToTable(P1);
-	    }
-	}
+		if (bP1Sit == true){
+			setbP1Sit(false);
+			}
+		else{
+			Player P1 = new Player(txtP1Name.getText());
+			gameTable.AddPlayerToTable(P1);
+			setbP1Sit(true);
+			}
+		}
 
 	//Add Player 2
 	@FXML
-	private void handleP2TSitLeave(ActionEvent event) {
-		Player P2 = new Player(txtP2Name.getText());
-	    if (btnP1SitLeave.isSelected()) {
-	        gameTable.AddPlayerToTable(P2);
-	    }
-	}
-
+	private void handleP2SitLeave(ActionEvent event) {
+		if (bP2Sit == true){
+			setbP2Sit(false);
+			}
+		else{
+			Player P2 = new Player(txtP2Name.getText());
+			gameTable.AddPlayerToTable(P2);
+			setbP2Sit(true);
+			}
+		}
+	
 	//Add Player 3
 	@FXML
 	private void handleP3SitLeave(ActionEvent event) {
-		Player P3 = new Player(txtP3Name.getText());
-	    if (btnP1SitLeave.isSelected()) {
-	        gameTable.AddPlayerToTable(P3);
-	    }
-	}
+		if (bP3Sit == true){
+			setbP3Sit(false);
+			}
+		else{
+			Player P3 = new Player(txtP3Name.getText());
+			gameTable.AddPlayerToTable(P3);
+			setbP3Sit(true);
+			}
+		}
 	
 	//Add Player 4
 	@FXML
-	private void handleP4itLeave(ActionEvent event) {
-		Player P4 = new Player(txtP4Name.getText());
-	    gameTable.AddPlayerToTable(P4);
-	}
-	
-	
+	private void handleP4SitLeave(ActionEvent event) {
+		if (bP4Sit == true){
+			setbP4Sit(false);
+			}
+		else{
+			Player P4 = new Player(txtP4Name.getText());
+			gameTable.AddPlayerToTable(P4);
+			setbP4Sit(true);
+			}
+		}
 }
